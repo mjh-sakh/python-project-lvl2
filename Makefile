@@ -23,3 +23,6 @@ run_help:
 
 test:
 	poetry run pytest
+
+package-install:
+	pip install --user --force-reinstall dist/hexlet_code-0.1.0-py3-none-any.whl
