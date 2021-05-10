@@ -33,7 +33,7 @@ def test_read_json_from_path_to_dict(file_path, expected_result):
     ("tests/simple.json", "tests/empty.json", [("-", "test", "1")]),
     ("tests/simple.json", "tests/simple.json", [(" ", "test", "1")]),
 ])
-def test_comparison_(file1, file2, expected_result):
+def test_get_comparison_for_two_dicts(file1, file2, expected_result):
     dict1 = generate_diff.read_json_from_path_to_dict(file1)
     dict2 = generate_diff.read_json_from_path_to_dict(file2)
     assert generate_diff.get_comparison_for_two_dicts(dict1, dict2) == expected_result
