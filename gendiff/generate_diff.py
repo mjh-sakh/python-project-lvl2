@@ -1,4 +1,4 @@
-import json
+from gendiff.parsing import read_json_from_path_to_dict
 
 
 def generate_diff(file1: str, file2: str) -> str:
@@ -14,12 +14,6 @@ def generate_diff(file1: str, file2: str) -> str:
     comparisons = get_comparison_for_two_dicts(dict1, dict2)
     comparisons_string = generate_comparison_output_string(comparisons)
     return comparisons_string
-
-
-def read_json_from_path_to_dict(file_path: str) -> dict:
-    with open(file_path, 'r') as file:
-        json_dict = json.load(file)
-    return json_dict
 
 
 class Comparisons(list):

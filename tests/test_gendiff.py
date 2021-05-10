@@ -1,5 +1,7 @@
 import pytest
 import os
+
+import gendiff.parsing
 from gendiff import generate_diff
 
 TEST_FOLDER = "tests"
@@ -36,7 +38,7 @@ def test_generate_diff(file1, file2, expected_result):
 ])
 def test_read_json_from_path_to_dict(file_path, expected_result):
     file_path = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_path)
-    assert generate_diff.read_json_from_path_to_dict(file_path) == expected_result
+    assert gendiff.parsing.read_json_from_path_to_dict(file_path) == expected_result
 
 
 @pytest.mark.parametrize("file1, file2, expected_result", [
@@ -47,8 +49,8 @@ def test_read_json_from_path_to_dict(file_path, expected_result):
 def test_get_comparison_for_two_dicts(file1, file2, expected_result):
     file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
     file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-    dict1 = generate_diff.read_json_from_path_to_dict(file1)
-    dict2 = generate_diff.read_json_from_path_to_dict(file2)
+    dict1 = gendiff.parsing.read_json_from_path_to_dict(file1)
+    dict2 = gendiff.parsing.read_json_from_path_to_dict(file2)
     assert generate_diff.get_comparison_for_two_dicts(dict1, dict2) == expected_result
 
 
