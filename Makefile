@@ -1,5 +1,11 @@
 #Makefile
 
+activate:
+	gcc .venv\Scripts\activate.bat
+
+deactivate:
+	deactivate
+
 install:
 	poetry install
 
@@ -14,3 +20,6 @@ lint:
 
 reps:
 	poetry show --tree
+
+run:
+	poetry run gendiff
