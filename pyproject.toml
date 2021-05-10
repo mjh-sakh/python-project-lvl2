@@ -4,6 +4,16 @@ version = "0.1.0"
 description = "hexlet python project lvl 2"
 authors = ["MjH"]
 license = "MIT"
+classifiers = [
+    "Development Status :: 7 - Inactive",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Education"
+]
+
+repository = "https://github.com/mjh-sakh/python-project-lvl2"
 
 [tool.poetry.dependencies]
 python = "^3.6"
