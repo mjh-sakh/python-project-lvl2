@@ -1,4 +1,5 @@
 import json
+import yaml
 import os
 
 
@@ -20,9 +21,17 @@ def read_json_from_path_to_dict(file_path: str) -> dict:
     :return: dict.
     """
     with open(file_path, 'r') as file:
-        json_dict = json.load(file)
-    return json_dict
+        python_dict = json.load(file)
+    return python_dict
 
 
 def read_yaml_from_path_to_dict(file_path: str) -> dict:
-    assert False, "Not implemented"
+    """
+    Read yaml file to Python dictionary.
+
+    :param file_path: str.
+    :return: dict.
+    """
+    with open(file_path, 'r') as file:
+        python_dict = yaml.load(file)
+    return python_dict

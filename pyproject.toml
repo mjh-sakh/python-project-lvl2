@@ -21,6 +21,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
+PyYAML = "^5.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.3"
