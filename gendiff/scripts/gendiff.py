@@ -3,10 +3,29 @@
 import argparse
 from gendiff.generate_diff import generate_diff
 
-parser = argparse.ArgumentParser(description="Generate diff.")
+DESCRIPTION = r"""
+  files:
+    file_one: {"key1": 1, "key2" : 2}
+    file_two: {"key1": 10, "key3" : 3}
+   
+  run command: 
+    gendiff file_one file_two
+    
+  result:
+    {
+      - key1: 1,
+      + key1: 10,
+        key2: 2,
+      + key3: 3
+    }
+"""
+
+parser = argparse.ArgumentParser(description="Compares two json objects and shows differences between them.",
+                                 usage=DESCRIPTION,
+                                 formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("first_file", help="First file to compare.")
 parser.add_argument("second_file", help="Second file to compare.")
-parser.add_argument("-f", "--format", help="Set format of output.")
+parser.add_argument("-f", "--format", choices=['json', 'pain'], help="Set format of output. 'json' is default.")
 
 
 def main():
