@@ -5,6 +5,7 @@ from gendiff import generate_diff
 TEST_FOLDER = "tests"
 FIXTURES_FOLDER = "fixtures"
 
+
 @pytest.mark.parametrize("file1, file2", [
     ("file1.json", "file2.json"),
 ])
@@ -18,7 +19,10 @@ def test_generate_diff_return_type_is_string(file1, file2):
     ("empty.json", "simple.json", "{\n  + test: 1\n}"),
     ("simple.json", "empty.json", "{\n  - test: 1\n}"),
     ("simple.json", "simple.json", "{\n    test: 1\n}"),
-    ("file1.json", "file2.json", "{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}")
+    ("file1.json", "file2.json",
+     "{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}"),
+    ("file1.yml", "file2.yaml",
+     "{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}")
 ])
 def test_generate_diff(file1, file2, expected_result):
     file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
