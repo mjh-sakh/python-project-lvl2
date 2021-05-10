@@ -96,3 +96,12 @@ def test_generate_comparison_output_string_format(comparisons_item, expected_res
     comparisons = generate_diff.Comparisons()
     comparisons.add_item(*comparisons_item)
     assert generate_diff.generate_comparison_output_string(comparisons) == expected_result
+
+
+@pytest.mark.parametrize("file_path, expected_result", [
+    ("test.json", parsing.read_json_from_path_to_dict),
+    ("test.yml", parsing.read_yaml_from_path_to_dict),
+    ("test.yaml", parsing.read_yaml_from_path_to_dict)
+])
+def test_get_proper_reader_for_file(file_path, expected_result):
+    assert parsing.get_proper_reader_for_file(file_path) is expected_result
