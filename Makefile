@@ -20,3 +20,6 @@ run:
 
 run_help:
 	poetry run gendiff -h
+
+test:
+	poetry run pytest
