@@ -3,7 +3,7 @@ import yaml
 import os
 
 
-def get_proper_reader_for_file(file_path: str):
+def get_proper_read_to_dict_for_file(file_path: str):
     file_name = os.path.split(file_path)[-1]
     extension = file_name.split('.')[-1]
     if extension == "json":
