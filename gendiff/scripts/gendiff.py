@@ -8,7 +8,8 @@ parser.add_argument("second_file", help="Second file to compare.")
 parser.add_argument("-f", "--format", help="Set format of output.")
 
 def main():
-    parser.parse_args()
+    args = parser.parse_args()
+    print(args)
 
 
 if __name__ == "__main__":
