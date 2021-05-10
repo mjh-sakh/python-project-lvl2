@@ -1,6 +1,8 @@
 import pytest
+import os
 from gendiff import generate_diff
 
+TEST_FOLDER = "tests"
 
 @pytest.mark.parametrize("file1, file2", [
     (r"tests\file1.json", r"tests\file2.json"),
@@ -10,29 +12,34 @@ def test_generate_diff_return_type_is_string(file1, file2):
 
 
 @pytest.mark.parametrize("file1, file2, expected_result", [
-    ("tests/empty.json", "tests/simple.json", "{\n  + test: 1\n}"),
-    ("tests/simple.json", "tests/empty.json", "{\n  - test: 1\n}"),
-    ("tests/simple.json", "tests/simple.json", "{\n    test: 1\n}"),
-    ("tests/file1.json", "tests/file2.json", "{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}")
+    ("empty.json", "simple.json", "{\n  + test: 1\n}"),
+    ("simple.json", "empty.json", "{\n  - test: 1\n}"),
+    ("simple.json", "simple.json", "{\n    test: 1\n}"),
+    ("file1.json", "file2.json", "{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}")
 ])
 def test_generate_diff(file1, file2, expected_result):
+    file1 = os.path.join(TEST_FOLDER, file1)
+    file2 = os.path.join(TEST_FOLDER, file2)
     assert generate_diff.generate_diff(file1, file2) == expected_result
 
 
 @pytest.mark.parametrize("file_path, expected_result", [
-    ("tests/empty.json", {}),
-    ("tests/simple.json", {"test": 1}),
+    ("empty.json", {}),
+    ("simple.json", {"test": 1}),
 ])
 def test_read_json_from_path_to_dict(file_path, expected_result):
+    file_path = os.path.join(TEST_FOLDER, file_path)
     assert generate_diff.read_json_from_path_to_dict(file_path) == expected_result
 
 
 @pytest.mark.parametrize("file1, file2, expected_result", [
-    ("tests/empty.json", "tests/simple.json", [("+", "test", "1")]),
-    ("tests/simple.json", "tests/empty.json", [("-", "test", "1")]),
-    ("tests/simple.json", "tests/simple.json", [(" ", "test", "1")]),
+    ("empty.json", "simple.json", [("+", "test", "1")]),
+    ("simple.json", "empty.json", [("-", "test", "1")]),
+    ("simple.json", "simple.json", [(" ", "test", "1")]),
 ])
 def test_get_comparison_for_two_dicts(file1, file2, expected_result):
+    file1 = os.path.join(TEST_FOLDER, file1)
+    file2 = os.path.join(TEST_FOLDER, file2)
     dict1 = generate_diff.read_json_from_path_to_dict(file1)
     dict2 = generate_diff.read_json_from_path_to_dict(file2)
     assert generate_diff.get_comparison_for_two_dicts(dict1, dict2) == expected_result
