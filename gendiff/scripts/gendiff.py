@@ -20,8 +20,7 @@ DESCRIPTION = r"""
     }
 """  # noqa: W291, W293
 
-parser = argparse.ArgumentParser(description="Compares two json objects and shows differences between them.",
-                                 # noqa: E501
+parser = argparse.ArgumentParser(description="Compares two json objects and shows differences between them.",  # noqa: E501
                                  usage=DESCRIPTION,
                                  formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("first_file", help="First file to compare.")
