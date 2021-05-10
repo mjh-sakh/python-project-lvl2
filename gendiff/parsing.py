@@ -33,5 +33,5 @@ def read_yaml_from_path_to_dict(file_path: str) -> dict:
     :return: dict.
     """
     with open(file_path, 'r') as file:
-        python_dict = yaml.load(file)
+        python_dict = yaml.safe_load(file)
     return python_dict
