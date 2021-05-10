@@ -3,7 +3,6 @@ import os
 
 
 def get_proper_reader_for_file(file_path: str):
-    assert os.path.isfile(file_path), f"{file_path} is not a file."
     file_name = os.path.split(file_path)[-1]
     extension = file_name.split('.')[-1]
     if extension == "json":
