@@ -37,8 +37,6 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     keys2 = dict2.keys()
     all_keys = keys1 | keys2
     comparisons = Comparisons()
-    flag = ""
-    value = None
     for key in sorted(list(all_keys)):
         if key not in dict1:  # key only in dict2
             flag = "+"
