@@ -29,6 +29,9 @@ parser.add_argument("-f", "--format", choices=['json', 'pain'], help="Set format
 
 
 def main():
+    """
+    Parse gendiff args and print comparison results.
+    """
     args = parser.parse_args()
     print(generate_diff(args.first_file, args.second_file))
 
