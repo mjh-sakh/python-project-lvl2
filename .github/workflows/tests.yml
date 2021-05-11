@@ -19,11 +19,10 @@ jobs:
 
       - name: Run tests
         run: make test
-        
-      - uses: paambaati/codeclimate-action@v2.7.5
+      
+      - name: create coverage report for CodeClimate
+        uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ba6c8d125464897f8634036aaa01fc0caf77e3b9b1270c4a25875dfe2c3b1b24
         with:
           coverageCommand: make coverage
-      - name: delete coverage report
-        run: rm coverage.xml
