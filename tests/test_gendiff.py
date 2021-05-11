@@ -31,6 +31,17 @@ class TestClassBlackBoxTests():
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
         assert generate_diff.generate_diff(file1, file2) == expected_result
 
+    @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
+        ("file3.json", "file4.json", "output_file3_file4.txt")
+    ])
+    def test_generate_diff_with_recursion(self, file1, file2, file_with_expected_result):
+        file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
+        file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
+        file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
+        with open(file_with_expected_result, 'r') as file:
+            expected_result = file.read()
+        assert generate_diff.generate_diff(file1, file2) == expected_result
+
 
 class TestClassWhiteBoxTests():
     @pytest.mark.parametrize("file_path, expected_result", [
