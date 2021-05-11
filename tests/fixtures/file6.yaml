@@ -1,0 +1,11 @@
+---
+common:
+  value2: 2.0
+  value3: 3
+  value4: 4
+  level3:
+    stays: true
+    new: "hello!"
+unique2:
+  deleted: true
+  works: false
