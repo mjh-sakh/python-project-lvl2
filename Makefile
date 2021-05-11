@@ -25,7 +25,8 @@ test:
 	poetry run pytest
 
 coverage:
-	poetry run coverage xml --include=gendiff/*
+	poetry run coverage run -m pytest
+	poetry run coverage xml
 
 package-install:
 	pip install --user --force-reinstall dist/hexlet_code-0.1.0-py3-none-any.whl
