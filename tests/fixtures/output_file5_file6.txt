@@ -1,22 +1,22 @@
 {
     common: {
-      - value1: 1,
-      - value2: 2.0,
-      + value2: 2.0,
-        value3: 3,
-      + value4: 4,
-        level3": {
-            stays": true,
-          - goes": yep,
-          + new": hello!
+        level3: {
+          - goes: yep
+          + new: hello!
+            stays: true
         }
-    },
-    - unique1: {
-        say1: one,
+      - value1: 1
+      - value2: 2
+      + value2: 2.1
+        value3: 3
+      + value4: 4
+    }
+  - unique1: {
+        say1: one
         say2: two
-    },
-    + unique2": {
-        deleted: true,
+    }
+  + unique2: {
+        deleted: true
         works: false
     }
 }
