@@ -1,4 +1,7 @@
 import os
+
+from gendiff.data_type import Comparisons
+from gendiff.formatter_stylish import generate_comparison_output_string
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
@@ -25,48 +28,6 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
     else:
         assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'  # noqa: E501
     return comparisons_string
-
-
-class Comparisons(list):
-    """
-    Container to store per-value comparisons based on list.
-    Provides two methods on top of list type:
-      add_item: adds tuple to the list (flag, key, value)
-      convert_value_to_string: converts all values to strings
-    """
-
-    def __init__(self):
-        super().__init__()
-
-    def add_item(self, flag, key, value):
-        """
-        Add comparison item into list.
-
-        :param flag: +/- or empty, str.
-        :param key: str.
-        :param value: original value, that will be converted to str.
-        """
-        self.append((flag, key, value))
-
-    # def __getitem__(self, item):
-    #     return dict(zip(["flag", "key", "value"], super().__getitem__(item)))
-
-
-def convert_value_to_string(value):
-    """
-    Convert value to string.
-
-    Convert Python "False" and "True" to lowercase.
-    Convert Python "None" to "null".
-
-    :param value: in any format.
-    :return: str.
-    """
-    if type(value) == bool:
-        return "true" if value else "false"
-    if value is None:
-        return "null"
-    return str(value)
 
 
 def prepare_value_for_comparisons(value):
@@ -125,23 +86,3 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     return comparisons
 
 
-def generate_comparison_output_string(comparisons, level=0) -> str:
-    """
-    Generate json like string from Comparisons list.
-
-    :param comparisons: Comparisons class.
-    :return: str.
-    """
-    result_string = "{"
-    indent = "    " * level
-    for comparison in comparisons:
-        result_string += "\n"
-        flag, key, value = comparison
-        if type(value) == Comparisons:
-            result_string += f"{indent}  {flag} {key}: "
-            result_string += generate_comparison_output_string(value, level + 1)
-        else:
-            value = convert_value_to_string(value)
-            result_string += f"{indent}  {flag} {key}: {value}"
-    result_string += f"\n{indent}}}"
-    return result_string
