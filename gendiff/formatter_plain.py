@@ -1,4 +1,4 @@
-from gendiff.data_type import Comparisons
+from gendiff.data_type import Comparisons, FLAGS
 import numbers
 
 
@@ -18,17 +18,17 @@ def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:
             result_string += generate_comparison_output_string(value, parent_key=key_full_path)
         else:
             value = convert_value_to_string(value)
-            if flag == "c+":
+            if flag == FLAGS["changed_new"]:
                 result_string += f"{value}\n"
-            elif flag[0] == "u":
+            elif flag == FLAGS["unchanged"]:
                 pass
             else:
                 result_string += f"Property '{key_full_path}' was "
-                if flag[0] == "n":
+                if flag == FLAGS["new"]:
                     result_string += f"added with value: {value}\n"
-                elif flag[0] == "r":
-                    result_string += f"removed\n"
-                elif flag == "c-":
+                elif flag == FLAGS["removed"]:
+                    result_string += "removed\n"
+                elif flag == FLAGS["changed_old"]:
                     result_string += f"updated. From {value} to "
     return result_string
 

@@ -1,6 +1,6 @@
 import os
 
-from gendiff.data_type import Comparisons
+from gendiff.data_type import Comparisons, FLAGS
 from gendiff import formatter_stylish
 from gendiff import formatter_plain
 from gendiff.parsing import get_proper_read_to_dict_for_file
@@ -55,13 +55,6 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     :param dict2: second dict.
     :return: Comparisons class.
     """
-    flags = {
-        "new": "n+",
-        "removed": "r-",
-        "changed_new": "c+",
-        "changed_old": "c-",
-        "unchanged": "u ",
-    }
 
     keys1 = dict1.keys()
     keys2 = dict2.keys()
@@ -69,12 +62,12 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     comparisons = Comparisons()
     for key in sorted(list(all_keys)):
         if key not in dict1:  # key only in dict2
-            flag = flags["new"]
+            flag = FLAGS["new"]
             value = dict2[key]
             value = prepare_value_for_comparisons(value)
             comparisons.add_item(flag, key, value)
         elif key not in dict2:  # key only in dict1
-            flag = flags["removed"]
+            flag = FLAGS["removed"]
             value = dict1[key]
             value = prepare_value_for_comparisons(value)
             comparisons.add_item(flag, key, value)
@@ -82,18 +75,18 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
             value1 = dict1[key]
             value2 = dict2[key]
             if value1 == value2:
-                flag = flags["unchanged"]
+                flag = FLAGS["unchanged"]
                 value = prepare_value_for_comparisons(value1)
                 comparisons.add_item(flag, key, value)
             elif type(value1) == dict and type(value2) == dict:
-                flag = flags["unchanged"]
+                flag = FLAGS["unchanged"]
                 sub_comparisons = get_comparison_for_two_dicts(value1, value2)
                 comparisons.add_item(flag, key, sub_comparisons)
             else:
-                flag = flags["changed_old"]
+                flag = FLAGS["changed_old"]
                 value1 = value = prepare_value_for_comparisons(value1)
                 comparisons.add_item(flag, key, value1)
-                flag = flags["changed_new"]
+                flag = FLAGS["changed_new"]
                 value2 = value = prepare_value_for_comparisons(value2)
                 comparisons.add_item(flag, key, value2)
     return comparisons

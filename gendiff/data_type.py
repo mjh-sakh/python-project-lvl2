@@ -21,3 +21,12 @@ class Comparisons(list):
 
     # def __getitem__(self, item):
     #     return dict(zip(["flag", "key", "value"], super().__getitem__(item)))
+
+
+FLAGS = {
+    "new": "n+",
+    "removed": "r-",
+    "changed_new": "c+",
+    "changed_old": "c-",
+    "unchanged": "u ",
+}
