@@ -8,3 +8,8 @@
 # gendiff: print json format for json and yaml
 
 [![gendiff step 5](https://img.youtube.com/vi/6zkkTDvJUrI/0.jpg)](https://www.youtube.com/watch?v=6zkkTDvJUrI "gendiff step 5")
+
+
+# Processing for nested json/yaml
+
+[![gendiff step 5](https://img.youtube.com/vi/rlIN1mhjbiM/0.jpg)](https://www.youtube.com/watch?v=rlIN1mhjbiM "gendiff step 5")
