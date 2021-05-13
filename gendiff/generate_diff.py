@@ -13,6 +13,7 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
     """
     assert os.path.isfile(file1), f"{file1} is not a file."
     assert os.path.isfile(file2), f"{file2} is not a file."
+    formatter = 'stylish' if formatter is None else formatter
 
     read_to_dict = get_proper_read_to_dict_for_file(file1)
     dict1 = read_to_dict(file1)
