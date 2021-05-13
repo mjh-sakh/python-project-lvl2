@@ -12,4 +12,9 @@
 
 # Processing for nested json/yaml
 
-[![gendiff step 5](https://img.youtube.com/vi/rlIN1mhjbiM/0.jpg)](https://www.youtube.com/watch?v=rlIN1mhjbiM "gendiff step 5")
+[![gendiff step 6](https://img.youtube.com/vi/rlIN1mhjbiM/0.jpg)](https://www.youtube.com/watch?v=rlIN1mhjbiM "gendiff step 6")
+
+
+# Plain format
+
+[![gendiff step 7](https://img.youtube.com/vi/WfA9NkfR8xw/0.jpg)](https://www.youtube.com/watch?v=WfA9NkfR8xw "gendiff step 7")
