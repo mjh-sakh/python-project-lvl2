@@ -22,7 +22,7 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
     if formatter == 'stylish':
         comparisons_string = generate_comparison_output_string(comparisons)
     else:
-        assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'
+        assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'  # noqa: E501
     return comparisons_string
 
 

@@ -34,7 +34,9 @@ def main():
     Parse gendiff args and print comparison results.
     """
     args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file, formatter=args.format))
+    print(generate_diff(args.first_file,
+                        args.second_file,
+                        formatter=args.format))
 
 
 if __name__ == "__main__":
