@@ -39,6 +39,8 @@ def convert_value_to_string(value):
 
     Convert Python "False" and "True" to lowercase.
     Convert Python "None" to "null".
+    Adds '' around String.
+    Convert other types to "[complex value]".
 
     :param value: in any format.
     :return: str.
