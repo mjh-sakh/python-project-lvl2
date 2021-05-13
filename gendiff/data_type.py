@@ -1,9 +1,8 @@
 class Comparisons(list):
     """
     Container to store per-value comparisons based on list.
-    Provides two methods on top of list type:
+    Provides a methods on top of list type:
       add_item: adds tuple to the list (flag, key, value)
-      convert_value_to_string: converts all values to strings
     """
 
     def __init__(self):
