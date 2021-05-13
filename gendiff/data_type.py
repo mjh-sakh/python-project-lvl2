@@ -12,7 +12,7 @@ class Comparisons(list):
         """
         Add comparison item into list.
 
-        :param flag from FLAGS indicating comparison result, str.
+        :param flag: from FLAGS indicating comparison result, str.
         :param key: str.
         :param value: original value, that will be converted to str.
         """
