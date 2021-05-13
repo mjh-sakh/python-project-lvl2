@@ -63,6 +63,18 @@ def convert_value_to_string(value):
     return str(value)
 
 
+def prepare_value_for_comparisons(value):
+    """
+    Check if value is dict and convert it to Comparisons for better handling.
+
+    :param value: any.
+    :return: Comparisons or value itself.
+    """
+    if type(value) == dict:
+        return get_comparison_for_two_dicts(value, value)
+    return value
+
+
 def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     """
     Compare two dictionaries and write all differences in Comparisons list.
@@ -79,26 +91,35 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
         if key not in dict1:  # key only in dict2
             flag = "+"
             value = dict2[key]
+            value = prepare_value_for_comparisons(value)
             comparisons.add_item(flag, key, value)
         elif key not in dict2:  # key only in dict1
             flag = "-"
             value = dict1[key]
+            value = prepare_value_for_comparisons(value)
             comparisons.add_item(flag, key, value)
         else:
             value1 = dict1[key]
             value2 = dict2[key]
             if value1 == value2:
                 flag = " "
-                comparisons.add_item(flag, key, value1)
+                value = prepare_value_for_comparisons(value1)
+                comparisons.add_item(flag, key, value)
+            elif type(value1) == dict and type(value2) == dict:
+                flag = " "
+                sub_comparisons = get_comparison_for_two_dicts(value1, value2)
+                comparisons.add_item(flag, key, sub_comparisons)
             else:
                 flag = "-"
+                value1 = value = prepare_value_for_comparisons(value1)
                 comparisons.add_item(flag, key, value1)
                 flag = "+"
+                value2 = value = prepare_value_for_comparisons(value2)
                 comparisons.add_item(flag, key, value2)
     return comparisons
 
 
-def generate_comparison_output_string(comparisons) -> str:
+def generate_comparison_output_string(comparisons, level=0) -> str:
     """
     Generate json like string from Comparisons list.
 
@@ -106,11 +127,15 @@ def generate_comparison_output_string(comparisons) -> str:
     :return: str.
     """
     result_string = "{"
-    flag_to_add_trailing_comma = False
+    indent = "    " * level
     for comparison in comparisons:
-        result_string += ",\n" if flag_to_add_trailing_comma else "\n"
+        result_string += "\n"
         flag, key, value = comparison
-        value = convert_value_to_string(value)
-        result_string += f"  {flag} {key}: {value}"
-    result_string += "\n}"
+        if type(value) == Comparisons:
+            result_string += f"{indent}  {flag} {key}: "
+            result_string += generate_comparison_output_string(value, level+1)
+        else:
+            value = convert_value_to_string(value)
+            result_string += f"{indent}  {flag} {key}: {value}"
+    result_string += f"\n{indent}}}"
     return result_string
