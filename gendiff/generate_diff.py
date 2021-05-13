@@ -2,10 +2,11 @@ import os
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
-def generate_diff(file1: str, file2: str) -> str:
+def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
     """
     Generate comparison between two files.
 
+    :param formatter: defines representation of result.
     :param file1: path to file 1.
     :param file2: path to file 2.
     :return: comparison string in json-like format.
@@ -18,7 +19,10 @@ def generate_diff(file1: str, file2: str) -> str:
     read_to_dict = get_proper_read_to_dict_for_file(file2)
     dict2 = read_to_dict(file2)
     comparisons = get_comparison_for_two_dicts(dict1, dict2)
-    comparisons_string = generate_comparison_output_string(comparisons)
+    if formatter == 'stylish':
+        comparisons_string = generate_comparison_output_string(comparisons)
+    else:
+        assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'
     return comparisons_string
 
 
