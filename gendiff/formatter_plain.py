@@ -2,7 +2,7 @@ from gendiff.data_type import Comparisons, FLAGS
 import numbers
 
 
-def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:
+def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:  # noqa: C901, E501
     """
     Generate plain formatted string from Comparisons list.
 
@@ -14,7 +14,7 @@ def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:
     for comparison in comparisons:
         flag, key, value = comparison
         key_full_path = f"{parent_key}.{key}" if parent_key else key
-        if type(value) == Comparisons and flag[0] == 'u':
+        if type(value) == Comparisons and flag == FLAGS["unchanged"]:
             result_string += generate_comparison_output_string(value, parent_key=key_full_path)  # noqa: E501
         else:
             value = convert_value_to_string(value)
