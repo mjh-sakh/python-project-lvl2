@@ -1,10 +1,11 @@
 from gendiff.data_type import Comparisons
 
 
-def generate_comparison_output_string(comparisons, level=0) -> str:
+def generate_comparison_output_string(comparisons, level: int = 0) -> str:
     """
     Generate json like string from Comparisons list.
 
+    :param level: level of nesting, 0 is top, int;
     :param comparisons: Comparisons class.
     :return: str.
     """
