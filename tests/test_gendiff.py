@@ -75,9 +75,9 @@ class TestClassWhiteBoxTests():
         assert parsing.read_json_from_path_to_dict(file_path) == expected_result
 
     @pytest.mark.parametrize("file1, file2, expected_result", [
-        ("empty.json", "simple.json", [("+", "test", 1)]),
-        ("simple.json", "empty.json", [("-", "test", 1)]),
-        ("simple.json", "simple.json", [(" ", "test", 1)]),
+        ("empty.json", "simple.json", [("n+", "test", 1)]),
+        ("simple.json", "empty.json", [("r-", "test", 1)]),
+        ("simple.json", "simple.json", [("u ", "test", 1)]),
     ])
     def test_get_comparison_for_two_dicts(self, file1, file2, expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)

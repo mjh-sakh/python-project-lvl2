@@ -15,11 +15,11 @@ def generate_comparison_output_string(comparisons, level: int = 0) -> str:
         result_string += "\n"
         flag, key, value = comparison
         if type(value) == Comparisons:
-            result_string += f"{indent}  {flag} {key}: "
+            result_string += f"{indent}  {flag[-1]} {key}: "
             result_string += generate_comparison_output_string(value, level + 1)
         else:
             value = convert_value_to_string(value)
-            result_string += f"{indent}  {flag} {key}: {value}"
+            result_string += f"{indent}  {flag[-1]} {key}: {value}"
     result_string += f"\n{indent}}}"
     return result_string
 

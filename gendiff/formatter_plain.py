@@ -1,24 +1,54 @@
 from gendiff.data_type import Comparisons
-from gendiff.formatter_stylish import convert_value_to_string
+import numbers
 
 
-def generate_comparison_output_string(comparisons, level=0) -> str:
+def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:
     """
-    Generate json like string from Comparisons list.
+    Generate plain formatted string from Comparisons list.
 
+    :param parent_key: name of parent key,  str.
     :param comparisons: Comparisons class.
     :return: str.
     """
-    result_string = "{"
-    indent = "    " * level
+    result_string = ""
     for comparison in comparisons:
-        result_string += "\n"
         flag, key, value = comparison
-        if type(value) == Comparisons:
-            result_string += f"{indent}  {flag} {key}: "
-            result_string += generate_comparison_output_string(value, level + 1)
+        key_full_path = f"{parent_key}.{key}" if parent_key else key
+        if type(value) == Comparisons and flag[0] == 'u':
+            result_string += generate_comparison_output_string(value, parent_key=key_full_path)
         else:
             value = convert_value_to_string(value)
-            result_string += f"{indent}  {flag} {key}: {value}"
-    result_string += f"\n{indent}}}"
+            if flag == "c+":
+                result_string += f"{value}\n"
+            elif flag[0] == "u":
+                pass
+            else:
+                result_string += f"Property '{key_full_path}' was "
+                if flag[0] == "n":
+                    result_string += f"added with value: {value}\n"
+                elif flag[0] == "r":
+                    result_string += f"removed\n"
+                elif flag == "c-":
+                    result_string += f"updated. From {value} to "
     return result_string
+
+
+def convert_value_to_string(value):
+    """
+    Convert value to string.
+
+    Convert Python "False" and "True" to lowercase.
+    Convert Python "None" to "null".
+
+    :param value: in any format.
+    :return: str.
+    """
+    if type(value) == bool:
+        return "true" if value else "false"
+    if value is None:
+        return "null"
+    if type(value) == str:
+        return f"'{value}'"
+    if isinstance(value, numbers.Number):
+        return str(value)
+    return "[complex value]"
