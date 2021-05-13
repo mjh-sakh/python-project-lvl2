@@ -41,24 +41,23 @@ class Comparisons(list):
         :param key: str.
         :param value: original value, that will be converted to str.
         """
-        value = self.convert_value_to_string(value)
         self.append((flag, key, value))
-
-    def convert_value_to_string(self, value):
-        """
-        Convert value to string.
-
-        Convert Python "False" and "True" to lowercase.
-
-        :param value: in any format.
-        :return: str.
-        """
-        if type(value) == bool:
-            return "true" if value else "false"
-        return str(value)
 
     # def __getitem__(self, item):
     #     return dict(zip(["flag", "key", "value"], super().__getitem__(item)))
+
+def convert_value_to_string(value):
+    """
+    Convert value to string.
+
+    Convert Python "False" and "True" to lowercase.
+
+    :param value: in any format.
+    :return: str.
+    """
+    if type(value) == bool:
+        return "true" if value else "false"
+    return str(value)
 
 
 def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
@@ -108,6 +107,7 @@ def generate_comparison_output_string(comparisons) -> str:
     for comparison in comparisons:
         result_string += ",\n" if flag_to_add_trailing_comma else "\n"
         flag, key, value = comparison
+        value = convert_value_to_string(value)
         result_string += f"  {flag} {key}: {value}"
     result_string += "\n}"
     return result_string

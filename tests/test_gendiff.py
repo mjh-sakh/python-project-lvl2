@@ -53,9 +53,9 @@ class TestClassWhiteBoxTests():
         assert parsing.read_json_from_path_to_dict(file_path) == expected_result
 
     @pytest.mark.parametrize("file1, file2, expected_result", [
-        ("empty.json", "simple.json", [("+", "test", "1")]),
-        ("simple.json", "empty.json", [("-", "test", "1")]),
-        ("simple.json", "simple.json", [(" ", "test", "1")]),
+        ("empty.json", "simple.json", [("+", "test", 1)]),
+        ("simple.json", "empty.json", [("-", "test", 1)]),
+        ("simple.json", "simple.json", [(" ", "test", 1)]),
     ])
     def test_get_comparison_for_two_dicts(self, file1, file2, expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
@@ -74,16 +74,9 @@ class TestClassWhiteBoxTests():
         comparisons.add_item("+", "test_bool", False)
         return comparisons
 
-    def test_Comparisons_class_content_to_be_all_strings(self, example_comparisons):
-        for items in example_comparisons:
-            assert all(map(lambda x: type(x) == str, items))
-
     def test_Comparisons_class_proper_bool_represenation(self):
-        comparisons = generate_diff.Comparisons()
-        comparisons.add_item(" ", "True", True)
-        comparisons.add_item(" ", "False", False)
-        assert comparisons[0][2] == "true"
-        assert comparisons[1][2] == "false"
+        assert generate_diff.convert_value_to_string(True) == "true"
+        assert generate_diff.convert_value_to_string(False) == "false"
 
     def test_Comparisons_class_equals(self):
         comparisons = generate_diff.Comparisons()
