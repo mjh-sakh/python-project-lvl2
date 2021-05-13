@@ -46,6 +46,7 @@ class Comparisons(list):
     # def __getitem__(self, item):
     #     return dict(zip(["flag", "key", "value"], super().__getitem__(item)))
 
+
 def convert_value_to_string(value):
     """
     Convert value to string.
@@ -133,7 +134,7 @@ def generate_comparison_output_string(comparisons, level=0) -> str:
         flag, key, value = comparison
         if type(value) == Comparisons:
             result_string += f"{indent}  {flag} {key}: "
-            result_string += generate_comparison_output_string(value, level+1)
+            result_string += generate_comparison_output_string(value, level + 1)
         else:
             value = convert_value_to_string(value)
             result_string += f"{indent}  {flag} {key}: {value}"
