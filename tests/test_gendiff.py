@@ -1,6 +1,8 @@
 import pytest
 import os
 
+import gendiff.data_type
+import gendiff.formatter_stylish
 from gendiff import generate_diff
 from gendiff import parsing
 
@@ -32,8 +34,8 @@ class TestClassBlackBoxTests():
         assert generate_diff.generate_diff(file1, file2) == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
-        ("file3.json", "file4.json", "output_file3_file4.txt"),
-        ("file5.yml", "file6.yaml", "output_file5_file6.txt")
+        ("file3.json", "file4.json", "output_stylish_file3_file4.txt"),
+        ("file5.yml", "file6.yaml", "output_stylish_file5_file6.txt")
     ])
     def test_generate_diff_with_recursion(self, file1, file2, file_with_expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
@@ -50,6 +52,18 @@ class TestClassBlackBoxTests():
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
         assert type(generate_diff.generate_diff(file1, file2, formatter=None)) == str
+
+    @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
+        ("file3.json", "file4.json", "output_stylish_file3_file4.txt"),
+        ("file5.yml", "file6.yaml", "output_stylish_file5_file6.txt")
+    ])
+    def test_generate_diff_with_plain_formatter(self, file1, file2, file_with_expected_result):
+        file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
+        file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
+        file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
+        with open(file_with_expected_result, 'r') as file:
+            expected_result = file.read()
+        assert generate_diff.generate_diff(file1, file2, formatter='plain') == expected_result
 
 class TestClassWhiteBoxTests():
     @pytest.mark.parametrize("file_path, expected_result", [
@@ -74,7 +88,7 @@ class TestClassWhiteBoxTests():
 
     @pytest.fixture
     def example_comparisons(self):
-        comparisons = generate_diff.Comparisons()
+        comparisons = gendiff.data_type.Comparisons()
         comparisons.add_item(" ", "test_str", "value")
         comparisons.add_item("+", "test_int", 1)
         comparisons.add_item("+", "test_float", 3.14)
@@ -83,11 +97,11 @@ class TestClassWhiteBoxTests():
         return comparisons
 
     def test_Comparisons_class_proper_bool_represenation(self):
-        assert generate_diff.convert_value_to_string(True) == "true"
-        assert generate_diff.convert_value_to_string(False) == "false"
+        assert gendiff.formatter_stylish.convert_value_to_string(True) == "true"
+        assert gendiff.formatter_stylish.convert_value_to_string(False) == "false"
 
     def test_Comparisons_class_equals(self):
-        comparisons = generate_diff.Comparisons()
+        comparisons = gendiff.data_type.Comparisons()
         item = (" ", "key", "value")
         comparisons.add_item(*item)
         assert comparisons == comparisons
@@ -100,9 +114,9 @@ class TestClassWhiteBoxTests():
         ((" ", "test", "1"), "{\n    test: 1\n}"),
     ])
     def test_generate_comparison_output_string_format(self, comparisons_item, expected_result):
-        comparisons = generate_diff.Comparisons()
+        comparisons = gendiff.data_type.Comparisons()
         comparisons.add_item(*comparisons_item)
-        assert generate_diff.generate_comparison_output_string(comparisons) == expected_result
+        assert gendiff.formatter_stylish.generate_comparison_output_string(comparisons) == expected_result
 
     @pytest.mark.parametrize("file_path, expected_result", [
         ("test.json", parsing.read_json_from_path_to_dict),
