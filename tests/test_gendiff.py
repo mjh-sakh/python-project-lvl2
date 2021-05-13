@@ -54,8 +54,8 @@ class TestClassBlackBoxTests():
         assert type(generate_diff.generate_diff(file1, file2, formatter=None)) == str
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
-        ("file3.json", "file4.json", "output_stylish_file3_file4.txt"),
-        ("file5.yml", "file6.yaml", "output_stylish_file5_file6.txt")
+        ("file3.json", "file4.json", "output_plain_file3_file4.txt"),
+        ("file5.yml", "file6.yaml", "output_plain_file5_file6.txt")
     ])
     def test_generate_diff_with_plain_formatter(self, file1, file2, file_with_expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
