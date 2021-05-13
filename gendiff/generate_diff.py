@@ -51,12 +51,15 @@ def convert_value_to_string(value):
     Convert value to string.
 
     Convert Python "False" and "True" to lowercase.
+    Convert Python "None" to "null".
 
     :param value: in any format.
     :return: str.
     """
     if type(value) == bool:
         return "true" if value else "false"
+    if value is None:
+        return "null"
     return str(value)
 
 
