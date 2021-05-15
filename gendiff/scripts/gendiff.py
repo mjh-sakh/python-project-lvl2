@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description="Compares two json objects and show
                                  formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("first_file", help="First file to compare.")
 parser.add_argument("second_file", help="Second file to compare.")
-parser.add_argument("-f", "--format", choices=['stylish', 'plain'],
+parser.add_argument("-f", "--format", choices=['stylish', 'plain', 'json'],
                     help="Set format of output. 'stylish' is default.")  # noqa: E501
 
 

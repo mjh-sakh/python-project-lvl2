@@ -3,6 +3,7 @@ import os
 from gendiff.data_type import Comparisons, FLAGS
 from gendiff import formatter_stylish
 from gendiff import formatter_plain
+from gendiff import formatter_json
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
@@ -30,6 +31,8 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
         comparisons_string = formatter_plain.generate_comparison_output_string(comparisons)  # noqa: E501
         if comparisons_string:
             comparisons_string = comparisons_string[:-1]  # removing last \n
+    elif formatter == "json":
+        comparisons_string = formatter_json.generate_comparison_output_string(comparisons)
     else:
         assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'  # noqa: E501
     return comparisons_string
