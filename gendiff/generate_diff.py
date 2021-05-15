@@ -32,7 +32,7 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
         if comparisons_string:
             comparisons_string = comparisons_string[:-1]  # removing last \n
     elif formatter == "json":
-        comparisons_string = formatter_json.generate_comparison_output_string(comparisons)
+        comparisons_string = formatter_json.generate_comparison_output_string(comparisons)  # noqa: E501
     else:
         assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'  # noqa: E501
     return comparisons_string
