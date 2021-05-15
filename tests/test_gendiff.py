@@ -65,6 +65,18 @@ class TestClassBlackBoxTests():
             expected_result = file.read()
         assert generate_diff.generate_diff(file1, file2, formatter='plain') == expected_result
 
+    @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
+        ("file5.yml", "file6.yaml", "output_json_file5_file6.txt")
+    ])
+    def test_generate_diff_with_json_formatter(self, file1, file2, file_with_expected_result):
+        file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
+        file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
+        file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
+        with open(file_with_expected_result, 'r') as file:
+            expected_result = file.read()
+        assert generate_diff.generate_diff(file1, file2, formatter='json') == expected_result
+
+
 class TestClassWhiteBoxTests():
     @pytest.mark.parametrize("file_path, expected_result", [
         ("empty.json", {}),
