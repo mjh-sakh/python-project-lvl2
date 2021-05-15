@@ -18,3 +18,8 @@
 # Plain format
 
 [![gendiff step 7](https://img.youtube.com/vi/WfA9NkfR8xw/0.jpg)](https://www.youtube.com/watch?v=WfA9NkfR8xw "gendiff step 7")
+
+
+# json as output 
+
+[![gendiff step 8](https://img.youtube.com/vi/62N7bR6KEnM/0.jpg)](https://www.youtube.com/watch?v=62N7bR6KEnM "gendiff step 8")
