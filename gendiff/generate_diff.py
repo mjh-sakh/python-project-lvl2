@@ -87,9 +87,9 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
                 comparisons.add_item(flag, key, sub_comparisons)
             else:
                 flag = FLAGS["changed_old"]
-                value1 = value = prepare_value_for_comparisons(value1)
+                value1 = prepare_value_for_comparisons(value1)
                 comparisons.add_item(flag, key, value1)
                 flag = FLAGS["changed_new"]
-                value2 = value = prepare_value_for_comparisons(value2)
+                value2 = prepare_value_for_comparisons(value2)
                 comparisons.add_item(flag, key, value2)
     return comparisons
