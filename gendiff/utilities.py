@@ -1,7 +1,7 @@
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
 
-def unpack_item(item: Dict[str, Any]) -> tuple[Any, str, str, Any]:
+def unpack_item(item: Dict[str, Any]) -> Tuple[Any, str, str, Any]:
     """
     Unpack comparison item.
 
