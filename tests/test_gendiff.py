@@ -11,14 +11,14 @@ TEST_FOLDER = "tests"
 FIXTURES_FOLDER = "fixtures"
 
 
-class TestClassBlackBoxTests():
+class TestClassBlackBoxTests:
     @pytest.mark.parametrize("file1, file2", [
         ("file1.json", "file2.json"),
     ])
     def test_generate_diff_return_type_is_string(self, file1, file2):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        assert type(generate_diff.generate_diff(file1, file2)) == str
+        assert type(generate_diff(file1, file2)) == str
 
     @pytest.mark.parametrize("file1, file2, expected_result", [
         ("empty.json", "simple.json", "{\n  + test: 1\n}"),
@@ -32,7 +32,7 @@ class TestClassBlackBoxTests():
     def test_generate_diff(self, file1, file2, expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        assert generate_diff.generate_diff(file1, file2) == expected_result
+        assert generate_diff(file1, file2) == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
         ("file3.json", "file4.json", "output_stylish_file3_file4.txt"),
@@ -44,7 +44,7 @@ class TestClassBlackBoxTests():
         file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
         with open(file_with_expected_result, 'r') as file:
             expected_result = file.read()
-        assert generate_diff.generate_diff(file1, file2) == expected_result
+        assert generate_diff(file1, file2) == expected_result
 
     @pytest.mark.parametrize("file1, file2", [
         ("file1.json", "file2.json"),
@@ -52,7 +52,7 @@ class TestClassBlackBoxTests():
     def test_generate_diff_with_none_formatter(self, file1, file2):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        assert type(generate_diff.generate_diff(file1, file2, formatter=None)) == str
+        assert type(generate_diff(file1, file2, formatter=None)) == str
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
         ("file3.json", "file4.json", "output_plain_file3_file4.txt"),
@@ -64,7 +64,7 @@ class TestClassBlackBoxTests():
         file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
         with open(file_with_expected_result, 'r') as file:
             expected_result = file.read()
-        assert generate_diff.generate_diff(file1, file2, formatter='plain') == expected_result
+        assert generate_diff(file1, file2, formatter='plain') == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
         ("file5.yml", "file6.yaml", "output_json_file5_file6.txt")
@@ -75,10 +75,10 @@ class TestClassBlackBoxTests():
         file_with_expected_result = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_with_expected_result)
         with open(file_with_expected_result, 'r') as file:
             expected_result = file.read()
-        assert generate_diff.generate_diff(file1, file2, formatter='json') == expected_result
+        assert generate_diff(file1, file2, formatter='json') == expected_result
 
 
-class TestClassWhiteBoxTests():
+class TestClassWhiteBoxTests:
     @pytest.mark.parametrize("file_path, expected_result", [
         ("empty.json", {}),
         ("simple.json", {"test": 1}),
@@ -87,17 +87,7 @@ class TestClassWhiteBoxTests():
         file_path = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_path)
         assert parsing.read_json_from_path_to_dict(file_path) == expected_result
 
-    @pytest.fixture
-    def example_comparisons(self):
-        comparisons = gendiff.utilities.Comparisons()
-        comparisons.add_item(" ", "test_str", "value")
-        comparisons.add_item("+", "test_int", 1)
-        comparisons.add_item("+", "test_float", 3.14)
-        comparisons.add_item("+", "test_bool", True)
-        comparisons.add_item("+", "test_bool", False)
-        return comparisons
-
-    def test_Comparisons_class_proper_bool_represenation(self):
+    def test_formatter_proper_bool_representation(self):
         assert gendiff.formatter_stylish.convert_value_to_string(True) == "true"
         assert gendiff.formatter_stylish.convert_value_to_string(False) == "false"
 
