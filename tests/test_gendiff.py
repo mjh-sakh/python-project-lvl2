@@ -1,8 +1,9 @@
-import pytest
 import os
 
-import gendiff.utilities
+import pytest
+
 import gendiff.formatter_stylish
+import gendiff.utilities
 from gendiff import generate_diff
 from gendiff import parsing
 
