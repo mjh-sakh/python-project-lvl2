@@ -38,28 +38,16 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
     return comparisons_string
 
 
-def prepare_value_for_comparisons(value):
-    """
-    Check if value is dict and convert it to Comparisons for better handling.
-
-    :param value: any.
-    :return: Comparisons or value itself.
-    """
-    if type(value) == dict:
-        return get_comparison_for_two_dicts(value, value)
-    return value
-
-
 def get_comparison_for_two_dicts(  # noqa: C901
         dict1: dict,
         dict2: dict
 ) -> list[dict[str, Any]]:
     """
-    Compare two dictionaries and write all differences in Comparisons list.
+    Compare two dictionaries and write all differences in comparison list.
 
     :param dict1: first dict.
     :param dict2: second dict.
-    :return: Comparisons class.
+    :return: comparisons, list[dict[str, Any]].
     """
 
     def _add_item(_value, item_type):

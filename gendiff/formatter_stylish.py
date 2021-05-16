@@ -16,10 +16,10 @@ def generate_comparison_output_string(
         level: int = 0
 ) -> str:
     """
-    Generate json like string from Comparisons list.
+    Generate json like string from comparison list.
 
     :param level: level of nesting, 0 is top, int;
-    :param comparisons: Comparisons class.
+    :param comparisons: comparisons, list[dict[str, Any]].
     :return: str.
     """
     result_string = "{"

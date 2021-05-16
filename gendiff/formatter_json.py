@@ -5,9 +5,9 @@ from gendiff.utilities import unpack_item
 
 def generate_comparison_output_string(comparisons) -> str:
     """
-    Generate json string that encodes Comparisons list.
+    Generate json string that encodes comparison list.
 
-    :param comparisons: Comparisons class.
+    :param comparisons: comparisons, list[dict[str, Any]].
     :return: str.
     """
     result_dict = generate_comparison_dict(comparisons)

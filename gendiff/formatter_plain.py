@@ -9,10 +9,10 @@ def generate_comparison_output_string(  # noqa: C901
         parent_key: str = ""
 ) -> str:
     """
-    Generate plain formatted string from Comparisons list.
+    Generate plain formatted string from comparison list.
 
     :param parent_key: name of parent key,  str.
-    :param comparisons: Comparisons class.
+    :param comparisons: comparisons, list[dict[str, Any]].
     :return: str.
     """
     result_string = ""
