@@ -22,7 +22,7 @@ run_help:
 	poetry run gendiff -h
 
 test:
-	mypy gendiff
+	poetry run mypy gendiff
 	poetry run pytest
 
 coverage:
