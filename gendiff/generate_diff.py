@@ -7,7 +7,11 @@ from gendiff import formatter_stylish
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
-def generate_diff(file1: str, file2: str, formatter: Optional[str] = 'stylish') -> str:
+def generate_diff(
+        file1: str,
+        file2: str,
+        formatter: Optional[str] = 'stylish'
+) -> str:
     """
     Generate comparison between two files.
 
