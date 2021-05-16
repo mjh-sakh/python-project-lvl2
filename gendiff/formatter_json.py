@@ -1,13 +1,14 @@
 import json
+from typing import Any, List, Dict
 
 from gendiff.utilities import unpack_item
 
 
-def generate_comparison_output_string(comparisons) -> str:
+def generate_comparison_output_string(comparisons: List[Dict[str, Any]]) -> str:
     """
     Generate json string that encodes comparison list.
 
-    :param comparisons: comparisons, list[dict[str, Any]].
+    :param comparisons: comparisons, List[Dict[str, Any]].
     :return: str.
     """
     result_dict = generate_comparison_dict(comparisons)

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List, Dict
 
 from gendiff.utilities import unpack_item
 
@@ -12,14 +12,14 @@ FLAGS = {
 
 
 def generate_comparison_output_string(
-        comparisons: list[dict[str, Any]],
+        comparisons: List[Dict[str, Any]],
         level: int = 0
 ) -> str:
     """
     Generate json like string from comparison list.
 
     :param level: level of nesting, 0 is top, int;
-    :param comparisons: comparisons, list[dict[str, Any]].
+    :param comparisons: comparisons, List[Dict[str, Any]].
     :return: str.
     """
     result_string = "{"

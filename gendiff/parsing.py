@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Dict
 
 import yaml
 
@@ -14,7 +15,7 @@ def get_proper_read_to_dict_for_file(file_path: str):
     assert True, f"Unsupported file type {extension}"
 
 
-def read_json_from_path_to_dict(file_path: str) -> dict:
+def read_json_from_path_to_dict(file_path: str) -> Dict:
     """
     Read json file to Python dictionary.
 
@@ -26,7 +27,7 @@ def read_json_from_path_to_dict(file_path: str) -> dict:
     return python_dict
 
 
-def read_yaml_from_path_to_dict(file_path: str) -> dict:
+def read_yaml_from_path_to_dict(file_path: str) -> Dict:
     """
     Read yaml file to Python dictionary.
 

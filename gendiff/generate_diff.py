@@ -1,5 +1,5 @@
 import os
-from typing import Any
+from typing import Any, List, Dict
 
 from gendiff import formatter_json
 from gendiff import formatter_plain
@@ -39,15 +39,15 @@ def generate_diff(file1: str, file2: str, formatter: str = 'stylish') -> str:
 
 
 def get_comparison_for_two_dicts(  # noqa: C901
-        dict1: dict,
-        dict2: dict
-) -> list[dict[str, Any]]:
+        dict1: Dict,
+        dict2: Dict
+) -> List[Dict[str, Any]]:
     """
     Compare two dictionaries and write all differences in comparison list.
 
     :param dict1: first dict.
     :param dict2: second dict.
-    :return: comparisons, list[dict[str, Any]].
+    :return: comparisons, List[Dict[str, Any]].
     """
 
     def _add_item(_value, item_type):

@@ -1,18 +1,18 @@
 import numbers
-from typing import Any
+from typing import Any, List, Dict
 
 from gendiff.utilities import unpack_item
 
 
 def generate_comparison_output_string(  # noqa: C901
-        comparisons: list[dict[str, Any]],
+        comparisons: List[Dict[str, Any]],
         parent_key: str = ""
 ) -> str:
     """
     Generate plain formatted string from comparison list.
 
     :param parent_key: name of parent key,  str.
-    :param comparisons: comparisons, list[dict[str, Any]].
+    :param comparisons: comparisons, List[Dict[str, Any]].
     :return: str.
     """
     result_string = ""
