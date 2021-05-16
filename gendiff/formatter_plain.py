@@ -1,8 +1,13 @@
-from gendiff.data_type import Comparisons, FLAGS
 import numbers
+from typing import Any
+
+from gendiff.utilities import unpack_item
 
 
-def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:  # noqa: C901, E501
+def generate_comparison_output_string(  # noqa: C901
+        comparisons: list[dict[str, Any]],
+        parent_key: str = ""
+) -> str:
     """
     Generate plain formatted string from Comparisons list.
 
@@ -12,28 +17,28 @@ def generate_comparison_output_string(comparisons, parent_key: str = "") -> str:
     """
     result_string = ""
     for comparison in comparisons:
-        flag, key, value = comparison
+        key, item_type, node_type, value = unpack_item(comparison)
         key_full_path = f"{parent_key}.{key}" if parent_key else key
-        if type(value) == Comparisons and flag == FLAGS["unchanged"]:
+        if node_type == "branch" and item_type == "same":
             result_string += generate_comparison_output_string(value, parent_key=key_full_path)  # noqa: E501
         else:
             value = convert_value_to_string(value)
-            if flag == FLAGS["changed_new"]:
+            if item_type == "updated_new":
                 result_string += f"{value}\n"
-            elif flag == FLAGS["unchanged"]:
+            elif item_type == "same":
                 pass
             else:
                 result_string += f"Property '{key_full_path}' was "
-                if flag == FLAGS["new"]:
+                if item_type == "new":
                     result_string += f"added with value: {value}\n"
-                elif flag == FLAGS["removed"]:
+                elif item_type == "removed":
                     result_string += "removed\n"
-                elif flag == FLAGS["changed_old"]:
+                elif item_type == "updated_old":
                     result_string += f"updated. From {value} to "
     return result_string
 
 
-def convert_value_to_string(value):
+def convert_value_to_string(value: Any) -> str:
     """
     Convert value to string.
 

@@ -1,7 +1,7 @@
 import pytest
 import os
 
-import gendiff.data_type
+import gendiff.utilities
 import gendiff.formatter_stylish
 from gendiff import generate_diff
 from gendiff import parsing
@@ -86,21 +86,9 @@ class TestClassWhiteBoxTests():
         file_path = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_path)
         assert parsing.read_json_from_path_to_dict(file_path) == expected_result
 
-    @pytest.mark.parametrize("file1, file2, expected_result", [
-        ("empty.json", "simple.json", [("n+", "test", 1)]),
-        ("simple.json", "empty.json", [("r-", "test", 1)]),
-        ("simple.json", "simple.json", [("u ", "test", 1)]),
-    ])
-    def test_get_comparison_for_two_dicts(self, file1, file2, expected_result):
-        file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
-        file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        dict1 = parsing.read_json_from_path_to_dict(file1)
-        dict2 = parsing.read_json_from_path_to_dict(file2)
-        assert generate_diff.get_comparison_for_two_dicts(dict1, dict2) == expected_result
-
     @pytest.fixture
     def example_comparisons(self):
-        comparisons = gendiff.data_type.Comparisons()
+        comparisons = gendiff.utilities.Comparisons()
         comparisons.add_item(" ", "test_str", "value")
         comparisons.add_item("+", "test_int", 1)
         comparisons.add_item("+", "test_float", 3.14)
@@ -111,24 +99,6 @@ class TestClassWhiteBoxTests():
     def test_Comparisons_class_proper_bool_represenation(self):
         assert gendiff.formatter_stylish.convert_value_to_string(True) == "true"
         assert gendiff.formatter_stylish.convert_value_to_string(False) == "false"
-
-    def test_Comparisons_class_equals(self):
-        comparisons = gendiff.data_type.Comparisons()
-        item = (" ", "key", "value")
-        comparisons.add_item(*item)
-        assert comparisons == comparisons
-        assert comparisons == [item]
-        assert not comparisons == []
-
-    @pytest.mark.parametrize("comparisons_item, expected_result", [
-        (("+", "test", "1"), "{\n  + test: 1\n}"),
-        (("-", "test", "1"), "{\n  - test: 1\n}"),
-        ((" ", "test", "1"), "{\n    test: 1\n}"),
-    ])
-    def test_generate_comparison_output_string_format(self, comparisons_item, expected_result):
-        comparisons = gendiff.data_type.Comparisons()
-        comparisons.add_item(*comparisons_item)
-        assert gendiff.formatter_stylish.generate_comparison_output_string(comparisons) == expected_result
 
     @pytest.mark.parametrize("file_path, expected_result", [
         ("test.json", parsing.read_json_from_path_to_dict),

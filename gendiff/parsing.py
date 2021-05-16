@@ -1,6 +1,7 @@
 import json
-import yaml
 import os
+
+import yaml
 
 
 def get_proper_read_to_dict_for_file(file_path: str):

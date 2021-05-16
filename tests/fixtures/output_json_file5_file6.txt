@@ -1,86 +1,102 @@
 {
-    "0": [
-        "u ",
-        "common",
-        {
-            "0.0": [
-                "u ",
-                "level3",
-                {
-                    "0.0.0": [
-                        "r-",
-                        "goes",
-                        "yep"
-                    ],
-                    "0.0.1": [
-                        "n+",
-                        "new",
-                        "hello!"
-                    ],
-                    "0.0.2": [
-                        "u ",
-                        "stays",
-                        true
-                    ]
+    "0": {
+        "item_type": "same",
+        "key": "common",
+        "node_type": "branch",
+        "value": {
+            "0.0": {
+                "item_type": "same",
+                "key": "level3",
+                "node_type": "branch",
+                "value": {
+                    "0.0.0": {
+                        "item_type": "removed",
+                        "key": "goes",
+                        "node_type": "leaf",
+                        "value": "yep"
+                    },
+                    "0.0.1": {
+                        "item_type": "new",
+                        "key": "new",
+                        "node_type": "leaf",
+                        "value": "hello!"
+                    },
+                    "0.0.2": {
+                        "item_type": "same",
+                        "key": "stays",
+                        "node_type": "leaf",
+                        "value": true
+                    }
                 }
-            ],
-            "0.1": [
-                "r-",
-                "value1",
-                1
-            ],
-            "0.2": [
-                "c-",
-                "value2",
-                2
-            ],
-            "0.3": [
-                "c+",
-                "value2",
-                2.1
-            ],
-            "0.4": [
-                "u ",
-                "value3",
-                3
-            ],
-            "0.5": [
-                "n+",
-                "value4",
-                4
-            ]
+            },
+            "0.1": {
+                "item_type": "removed",
+                "key": "value1",
+                "node_type": "leaf",
+                "value": 1
+            },
+            "0.2": {
+                "item_type": "updated_old",
+                "key": "value2",
+                "node_type": "leaf",
+                "value": 2
+            },
+            "0.3": {
+                "item_type": "updated_new",
+                "key": "value2",
+                "node_type": "leaf",
+                "value": 2.1
+            },
+            "0.4": {
+                "item_type": "same",
+                "key": "value3",
+                "node_type": "leaf",
+                "value": 3
+            },
+            "0.5": {
+                "item_type": "new",
+                "key": "value4",
+                "node_type": "leaf",
+                "value": 4
+            }
         }
-    ],
-    "1": [
-        "r-",
-        "unique1",
-        {
-            "1.0": [
-                "u ",
-                "say1",
-                "one"
-            ],
-            "1.1": [
-                "u ",
-                "say2",
-                "two"
-            ]
+    },
+    "1": {
+        "item_type": "same",
+        "key": "unique1",
+        "node_type": "branch",
+        "value": {
+            "1.0": {
+                "item_type": "same",
+                "key": "say1",
+                "node_type": "leaf",
+                "value": "one"
+            },
+            "1.1": {
+                "item_type": "same",
+                "key": "say2",
+                "node_type": "leaf",
+                "value": "two"
+            }
         }
-    ],
-    "2": [
-        "n+",
-        "unique2",
-        {
-            "2.0": [
-                "u ",
-                "deleted",
-                true
-            ],
-            "2.1": [
-                "u ",
-                "works",
-                false
-            ]
+    },
+    "2": {
+        "item_type": "same",
+        "key": "unique2",
+        "node_type": "branch",
+        "value": {
+            "2.0": {
+                "item_type": "same",
+                "key": "deleted",
+                "node_type": "leaf",
+                "value": true
+            },
+            "2.1": {
+                "item_type": "same",
+                "key": "works",
+                "node_type": "leaf",
+                "value": false
+            }
         }
-    ]
+    }
 }

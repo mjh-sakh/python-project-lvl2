@@ -1,9 +1,9 @@
 import os
+from typing import Any
 
-from gendiff.data_type import Comparisons, FLAGS
-from gendiff import formatter_stylish
-from gendiff import formatter_plain
 from gendiff import formatter_json
+from gendiff import formatter_plain
+from gendiff import formatter_stylish
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
@@ -50,7 +50,10 @@ def prepare_value_for_comparisons(value):
     return value
 
 
-def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
+def get_comparison_for_two_dicts(  # noqa: C901
+        dict1: dict,
+        dict2: dict
+) -> list[dict[str, Any]]:
     """
     Compare two dictionaries and write all differences in Comparisons list.
 
@@ -59,37 +62,38 @@ def get_comparison_for_two_dicts(dict1: dict, dict2: dict):
     :return: Comparisons class.
     """
 
+    def _add_item(_value, item_type):
+        if type(_value) == dict:
+            node_type = "branch"
+            _value = get_comparison_for_two_dicts(_value, _value)
+        else:
+            node_type = "leaf"
+        item = dict(key=key, item_type=item_type, node_type=node_type, value=_value)  # noqa: E501
+        comparisons.append(item)
+
     keys1 = dict1.keys()
     keys2 = dict2.keys()
     all_keys = keys1 | keys2
-    comparisons = Comparisons()
+    comparisons = []
+    item_type: str
+    value: Any
     for key in sorted(list(all_keys)):
         if key not in dict1:  # key only in dict2
-            flag = FLAGS["new"]
             value = dict2[key]
-            value = prepare_value_for_comparisons(value)
-            comparisons.add_item(flag, key, value)
+            _add_item(value, item_type="new")
         elif key not in dict2:  # key only in dict1
-            flag = FLAGS["removed"]
             value = dict1[key]
-            value = prepare_value_for_comparisons(value)
-            comparisons.add_item(flag, key, value)
+            _add_item(value, item_type="removed")
         else:
             value1 = dict1[key]
             value2 = dict2[key]
             if value1 == value2:
-                flag = FLAGS["unchanged"]
-                value = prepare_value_for_comparisons(value1)
-                comparisons.add_item(flag, key, value)
+                _add_item(value1, item_type="same")
             elif type(value1) == dict and type(value2) == dict:
-                flag = FLAGS["unchanged"]
                 sub_comparisons = get_comparison_for_two_dicts(value1, value2)
-                comparisons.add_item(flag, key, sub_comparisons)
+                item = dict(key=key, item_type="same", node_type="branch", value=sub_comparisons)  # noqa: E501
+                comparisons.append(item)
             else:
-                flag = FLAGS["changed_old"]
-                value1 = prepare_value_for_comparisons(value1)
-                comparisons.add_item(flag, key, value1)
-                flag = FLAGS["changed_new"]
-                value2 = prepare_value_for_comparisons(value2)
-                comparisons.add_item(flag, key, value2)
+                _add_item(value1, item_type="updated_old")
+                _add_item(value2, item_type="updated_new")
     return comparisons
