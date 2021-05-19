@@ -33,8 +33,6 @@ def generate_diff(
         comparisons_string = formatter_stylish.generate_comparison_output_string(comparisons)  # noqa: E501
     elif formatter == "plain":
         comparisons_string = formatter_plain.generate_comparison_output_string(comparisons)  # noqa: E501
-        if comparisons_string:
-            comparisons_string = comparisons_string[:-1]  # removing last \n
     elif formatter == "json":
         comparisons_string = formatter_json.generate_comparison_output_string(comparisons)  # noqa: E501
     else:
