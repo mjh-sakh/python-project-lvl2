@@ -68,22 +68,19 @@ def get_comparison_for_two_dicts(  # noqa: C901
     item_type: str
     value: Any
     for key in sorted(all_keys):
+        value1 = dict1.get(key)
+        value2 = dict2.get(key)
         if key not in dict1:  # key only in dict2
-            value = dict2[key]
-            _add_item(value, item_type="new")
+            _add_item(value2, item_type="new")
         elif key not in dict2:  # key only in dict1
-            value = dict1[key]
-            _add_item(value, item_type="removed")
+            _add_item(value1, item_type="removed")
+        elif value1 == value2:
+            _add_item(value1, item_type="same")
+        elif type(value1) == dict and type(value2) == dict:
+            sub_comparisons = get_comparison_for_two_dicts(value1, value2)
+            item = dict(key=key, item_type="same", node_type="branch", value=sub_comparisons)  # noqa: E501
+            comparisons.append(item)
         else:
-            value1 = dict1[key]
-            value2 = dict2[key]
-            if value1 == value2:
-                _add_item(value1, item_type="same")
-            elif type(value1) == dict and type(value2) == dict:
-                sub_comparisons = get_comparison_for_two_dicts(value1, value2)
-                item = dict(key=key, item_type="same", node_type="branch", value=sub_comparisons)  # noqa: E501
-                comparisons.append(item)
-            else:
-                _add_item(value1, item_type="updated_old")
-                _add_item(value2, item_type="updated_new")
+            _add_item(value1, item_type="updated_old")
+            _add_item(value2, item_type="updated_new")
     return comparisons
