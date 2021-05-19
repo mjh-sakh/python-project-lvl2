@@ -33,8 +33,6 @@ def main():
     parser.add_argument("second_file", help="Second file to compare.")
     parser.add_argument("-f", "--format", choices=['stylish', 'plain', 'json'],
                         help="Set format of output. 'stylish' is default.")  # noqa: E501
-
-
     args = parser.parse_args()
     print(generate_diff(args.first_file,
                         args.second_file,
