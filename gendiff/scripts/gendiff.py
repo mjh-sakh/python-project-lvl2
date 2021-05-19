@@ -2,7 +2,7 @@
 
 import argparse
 
-from gendiff.core import generate_diff
+from gendiff import generate_diff
 
 DESCRIPTION = r"""
   files:
