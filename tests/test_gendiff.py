@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-import gendiff.formatter_stylish
+import gendiff.formatters.formatter_stylish
 import gendiff.utilities
 from gendiff import generate_diff
 from gendiff import parsing
@@ -88,8 +88,8 @@ class TestClassWhiteBoxTests:
         assert parsing.read_json_from_path_to_dict(file_path) == expected_result
 
     def test_formatter_proper_bool_representation(self):
-        assert gendiff.formatter_stylish.convert_value_to_string(True) == "true"
-        assert gendiff.formatter_stylish.convert_value_to_string(False) == "false"
+        assert gendiff.formatters.formatter_stylish.convert_value_to_string(True) == "true"
+        assert gendiff.formatters.formatter_stylish.convert_value_to_string(False) == "false"
 
     @pytest.mark.parametrize("file_path, expected_result", [
         ("test.json", parsing.read_json_from_path_to_dict),

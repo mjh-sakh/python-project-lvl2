@@ -1,9 +1,9 @@
 import os
 from typing import Any, List, Dict, Optional
 
-from gendiff import formatter_json
-from gendiff import formatter_plain
-from gendiff import formatter_stylish
+from gendiff.formatters import formatter_json
+from gendiff.formatters import formatter_plain
+from gendiff.formatters import formatter_stylish
 from gendiff.parsing import get_proper_read_to_dict_for_file
 
 
