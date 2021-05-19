@@ -62,7 +62,7 @@
         }
     },
     "1": {
-        "item_type": "same",
+        "item_type": "removed",
         "key": "unique1",
         "node_type": "branch",
         "value": {
@@ -81,7 +81,7 @@
         }
     },
     "2": {
-        "item_type": "same",
+        "item_type": "new",
         "key": "unique2",
         "node_type": "branch",
         "value": {
