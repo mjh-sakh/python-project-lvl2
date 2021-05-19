@@ -67,7 +67,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
     comparisons = []
     item_type: str
     value: Any
-    for key in sorted(list(all_keys)):
+    for key in sorted(all_keys):
         if key not in dict1:  # key only in dict2
             value = dict2[key]
             _add_item(value, item_type="new")
