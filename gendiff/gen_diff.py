@@ -76,7 +76,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
             _add_item(value1, item_type="removed")
         elif value1 == value2:
             _add_item(value1, item_type="same")
-        elif type(value1) == dict and type(value2) == dict:
+        elif isinstance(value1, dict) and isinstance(value2, dict):
             sub_comparisons = get_comparison_for_two_dicts(value1, value2)
             item = dict(key=key, item_type="same", node_type="branch", value=sub_comparisons)  # noqa: E501
             comparisons.append(item)
