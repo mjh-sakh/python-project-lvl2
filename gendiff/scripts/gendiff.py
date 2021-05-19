@@ -26,9 +26,11 @@ def main():
     """
     Parse gendiff args and print comparison results.
     """
-    parser = argparse.ArgumentParser(description="Compares two json objects and shows differences between them.", # noqa: E501
-                                     usage=DESCRIPTION,
-                                     formatter_class=argparse.RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description="Compares two json objects and shows differences between them.",  # noqa: E501
+        usage=DESCRIPTION,
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("first_file", help="First file to compare.")
     parser.add_argument("second_file", help="Second file to compare.")
     parser.add_argument("-f", "--format", choices=['stylish', 'plain', 'json'],
