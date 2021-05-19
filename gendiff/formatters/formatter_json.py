@@ -23,7 +23,7 @@ def generate_comparison_dict(comparisons, parent_key=None) -> dict:
         dict_key = str(line_count) if parent_key is None else f"{parent_key}.{line_count}"  # noqa: E501
         if node_type == "branch":
             value = generate_comparison_dict(value, parent_key=dict_key)
-            result_dict[dict_key] = dict(key=key, item_type="same", node_type="branch", value=value)  # noqa: E501
+            result_dict[dict_key] = dict(key=key, item_type=item_type, node_type="branch", value=value)  # noqa: E501
         else:
             result_dict[dict_key] = comparison
     return result_dict
