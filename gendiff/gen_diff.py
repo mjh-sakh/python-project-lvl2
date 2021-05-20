@@ -53,12 +53,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
     """
 
     def _add_item(_value, item_type):
-        if type(_value) == dict:
-            node_type = "branch"
-            _value = get_comparison_for_two_dicts(_value, _value)
-        else:
-            node_type = "leaf"
-        item = dict(key=key, item_type=item_type, node_type=node_type, value=_value)  # noqa: E501
+        item = dict(key=key, item_type=item_type, value=_value)  # noqa: E501
         comparisons.append(item)
 
     keys1 = dict1.keys()
@@ -78,7 +73,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
             _add_item(value1, item_type="same")
         elif isinstance(value1, dict) and isinstance(value2, dict):
             sub_comparisons = get_comparison_for_two_dicts(value1, value2)
-            item = dict(key=key, item_type="same", node_type="branch", value=sub_comparisons)  # noqa: E501
+            item = dict(key=key, item_type="updated_branch", value=sub_comparisons)  # noqa: E501
             comparisons.append(item)
         else:
             _add_item(value1, item_type="updated_old")

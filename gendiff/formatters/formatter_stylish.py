@@ -7,8 +7,11 @@ FLAGS = {
     "removed": "-",
     "updated_new": "+",
     "updated_old": "-",
+    "updated_branch": " ",
     "same": " ",
 }
+
+INDENT = "    "
 
 
 def generate_comparison_output_string(
@@ -23,22 +26,22 @@ def generate_comparison_output_string(
     :return: str.
     """
     result_string = "{"
-    indent = "    " * level
+    indent = INDENT * level
     for comparison in comparisons:
         result_string += "\n"
-        key, item_type, node_type, value = unpack_item(comparison)
+        key, item_type, value = unpack_item(comparison)
         flag = FLAGS[item_type]
-        if node_type == "branch":
+        if item_type == "updated_branch":
             result_string += f"{indent}  {flag} {key}: "
             result_string += generate_comparison_output_string(value, level + 1)
         else:
-            value = convert_value_to_string(value)
+            value = convert_value_to_string(value, indent=indent + INDENT)
             result_string += f"{indent}  {flag} {key}: {value}"
     result_string += f"\n{indent}}}"
     return result_string
 
 
-def convert_value_to_string(value) -> str:
+def convert_value_to_string(value: Any, indent: str = INDENT) -> str:
     """
     Convert value to string.
 
@@ -52,4 +55,12 @@ def convert_value_to_string(value) -> str:
         return "true" if value else "false"
     if value is None:
         return "null"
+    if isinstance(value, dict):
+        string: str = "{\n"
+        for key, _value in value.items():
+            string += f"{INDENT}{indent}{key}: "
+            string += convert_value_to_string(_value, indent=indent + INDENT)
+            string += "\n"
+        string += f"{indent}}}"
+        return string
     return str(value)

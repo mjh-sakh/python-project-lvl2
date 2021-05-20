@@ -27,9 +27,9 @@ def generate_comparison_output_long_string(  # noqa: C901
     """
     result_string = ""
     for comparison in comparisons:
-        key, item_type, node_type, value = unpack_item(comparison)
+        key, item_type, value = unpack_item(comparison)
         key_full_path = f"{parent_key}.{key}" if parent_key else key
-        if node_type == "branch" and item_type == "same":
+        if item_type == "updated_branch":
             result_string += generate_comparison_output_long_string(value, parent_key=key_full_path)  # noqa: E501
         else:
             value = convert_value_to_string(value)
