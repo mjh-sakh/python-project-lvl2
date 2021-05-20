@@ -36,7 +36,7 @@ def generate_diff(
     elif formatter == "json":
         comparisons_string = formatter_json.generate_comparison_output_string(comparisons)  # noqa: E501
     else:
-        assert False, f'Formatter "{formatter}" is not implemented. Choose "stylish"'  # noqa: E501
+        raise AttributeError('Formatter "{formatter}" is not implemented. Choose "stylish"')  # noqa: E501
     return comparisons_string
 
 
