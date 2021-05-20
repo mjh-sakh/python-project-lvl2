@@ -60,11 +60,11 @@ def convert_value_to_string(value: Any) -> str:
     :param value: in any format.
     :return: str.
     """
-    if type(value) == bool:
+    if isinstance(value, bool):
         return "true" if value else "false"
     if value is None:
         return "null"
-    if type(value) == str:
+    if isinstance(value, str):
         return f"'{value}'"
     if isinstance(value, numbers.Number):
         return str(value)

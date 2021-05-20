@@ -48,7 +48,7 @@ def convert_value_to_string(value) -> str:
     :param value: in any format.
     :return: str.
     """
-    if type(value) == bool:
+    if isinstance(value, bool):
         return "true" if value else "false"
     if value is None:
         return "null"

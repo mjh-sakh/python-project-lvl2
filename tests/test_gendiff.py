@@ -18,7 +18,7 @@ class TestClassBlackBoxTests:
     def test_generate_diff_return_type_is_string(self, file1, file2):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        assert type(generate_diff(file1, file2)) == str
+        assert isinstance(generate_diff(file1, file2), str)
 
     @pytest.mark.parametrize("file1, file2, expected_result", [
         ("empty.json", "simple.json", "{\n  + test: 1\n}"),
@@ -52,7 +52,7 @@ class TestClassBlackBoxTests:
     def test_generate_diff_with_none_formatter(self, file1, file2):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
         file2 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file2)
-        assert type(generate_diff(file1, file2, formatter=None)) == str
+        assert isinstance(generate_diff(file1, file2, formatter=None), str)
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
         ("file3.json", "file4.json", "output_plain_file3_file4.txt"),
