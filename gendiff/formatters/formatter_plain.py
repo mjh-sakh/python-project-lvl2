@@ -29,22 +29,20 @@ def generate_comparison_output_long_string(  # noqa: C901
     for comparison in comparisons:
         key, item_type, value = unpack_item(comparison)
         key_full_path = f"{parent_key}.{key}" if parent_key else key
+        property_was = f"Property '{key_full_path}' was"
+        value_string = convert_value_to_string(value)
         if item_type == "updated_branch":
             result_string += generate_comparison_output_long_string(value, parent_key=key_full_path)  # noqa: E501
-        else:
-            value = convert_value_to_string(value)
-            if item_type == "updated_new":
-                result_string += f"{value}\n"
-            elif item_type == "same":
-                pass
-            else:
-                result_string += f"Property '{key_full_path}' was "
-                if item_type == "new":
-                    result_string += f"added with value: {value}\n"
-                elif item_type == "removed":
-                    result_string += "removed\n"
-                elif item_type == "updated_old":
-                    result_string += f"updated. From {value} to "
+        elif item_type == "updated_old":
+            result_string += f"{property_was} updated. From {value_string} to "
+        elif item_type == "updated_new":
+            result_string += f"{value_string}\n"
+        elif item_type == "new":
+            result_string += f"{property_was} added with value: {value_string}\n"  # noqa: E501
+        elif item_type == "removed":
+            result_string += f"{property_was} removed\n"
+        else:  # same
+            pass
     return result_string
 
 
