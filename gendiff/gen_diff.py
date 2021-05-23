@@ -64,15 +64,13 @@ def get_comparison_for_two_dicts(  # noqa: C901
     """
 
     def _add_item(_value, item_type):
-        item = dict(key=key, item_type=item_type, value=_value)  # noqa: E501
+        item = dict(key=key, item_type=item_type, value=_value)
         comparisons.append(item)
 
     keys1 = dict1.keys()
     keys2 = dict2.keys()
     all_keys = keys1 | keys2
     comparisons = []
-    item_type: str
-    value: Any
     for key in sorted(all_keys):
         value1 = dict1.get(key)
         value2 = dict2.get(key)
