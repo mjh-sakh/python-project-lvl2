@@ -70,7 +70,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
     keys1 = dict1.keys()
     keys2 = dict2.keys()
     all_keys = keys1 | keys2
-    comparisons = []
+    comparisons: List[Dict[str, Any]] = []
     for key in sorted(all_keys):
         value1 = dict1.get(key)
         value2 = dict2.get(key)
