@@ -1,17 +1,23 @@
 import json
 import os
-from typing import Dict
+from typing import Dict, Callable
 
 import yaml
 
 
-def get_proper_read_to_dict_for_file(file_path: str):
+def get_proper_read_to_dict_for_file(file_path: str) -> Callable:
+    """
+    Get proper function to read specific file based on file extension.
+
+    :param file_path: str.
+    :return: json or yaml read to dict function.
+    """
     extension = os.path.splitext(file_path)[-1]
     if extension == ".json":
         return read_json_from_path_to_dict
     elif extension in (".yml", ".yaml"):
         return read_yaml_from_path_to_dict
-    assert True, f"Unsupported file type {extension}"
+    raise NotImplementedError(f"Unsupported file type {extension}")
 
 
 def read_json_from_path_to_dict(file_path: str) -> Dict:

@@ -48,8 +48,7 @@ def get_formatter(formatter: str) -> Callable:
     elif formatter == "json":
         return formatter_json.generate_comparison_output_string
     else:
-        raise AttributeError('Formatter "{formatter}" is not implemented. Choose "stylish"')  # noqa: E501
-    return comparisons_string
+        raise NotImplementedError('Formatter "{formatter}" is not implemented. Choose "stylish"')  # noqa: E501
 
 
 def get_comparison_for_two_dicts(  # noqa: C901
