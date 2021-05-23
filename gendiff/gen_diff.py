@@ -82,8 +82,7 @@ def get_comparison_for_two_dicts(  # noqa: C901
             _add_item(value1, item_type="same")
         elif isinstance(value1, dict) and isinstance(value2, dict):
             sub_comparisons = get_comparison_for_two_dicts(value1, value2)
-            item = dict(key=key, item_type="updated_branch", value=sub_comparisons)  # noqa: E501
-            comparisons.append(item)
+            _add_item(sub_comparisons, item_type="updated_branch")
         else:
             _add_item(value1, item_type="updated_old")
             _add_item(value2, item_type="updated_new")
