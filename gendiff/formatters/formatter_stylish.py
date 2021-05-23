@@ -48,6 +48,7 @@ def convert_value_to_string(value: Any, indent: str = INDENT) -> str:
     Convert Python "False" and "True" to lowercase.
     Convert Python "None" to "null".
 
+    :param indent: indent via spaces, str.
     :param value: in any format.
     :return: str.
     """
