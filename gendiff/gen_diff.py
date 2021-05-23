@@ -1,5 +1,5 @@
 import os
-from typing import Any, List, Dict, Optional
+from typing import Any, List, Dict, Optional, Callable
 
 from gendiff.formatters import formatter_json
 from gendiff.formatters import formatter_plain
@@ -29,12 +29,24 @@ def generate_diff(
     read_to_dict = get_proper_read_to_dict_for_file(file2)
     dict2 = read_to_dict(file2)
     comparisons = get_comparison_for_two_dicts(dict1, dict2)
+    generate_comparison_output_string = get_formatter(formatter)
+    comparisons_string = generate_comparison_output_string(comparisons)
+    return comparisons_string
+
+
+def get_formatter(formatter: str) -> Callable:
+    """
+    Get proper formatter function to generate string.
+
+    :param formatter: stylish, plain or json, str.
+    :return: formatter function.
+    """
     if formatter == 'stylish':
-        comparisons_string = formatter_stylish.generate_comparison_output_string(comparisons)  # noqa: E501
+        return formatter_stylish.generate_comparison_output_string
     elif formatter == "plain":
-        comparisons_string = formatter_plain.generate_comparison_output_string(comparisons)  # noqa: E501
+        return formatter_plain.generate_comparison_output_string
     elif formatter == "json":
-        comparisons_string = formatter_json.generate_comparison_output_string(comparisons)  # noqa: E501
+        return formatter_json.generate_comparison_output_string
     else:
         raise AttributeError('Formatter "{formatter}" is not implemented. Choose "stylish"')  # noqa: E501
     return comparisons_string
