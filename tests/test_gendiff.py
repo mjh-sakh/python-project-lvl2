@@ -85,16 +85,16 @@ class TestClassWhiteBoxTests:
     ])
     def test_read_json_from_path_to_dict(self, file_path, expected_result):
         file_path = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file_path)
-        assert parsing.read_json_from_path_to_dict(file_path) == expected_result
+        assert parsing.read_json_to_dict(file_path) == expected_result
 
     def test_formatter_proper_bool_representation(self):
         assert gendiff.formatters.formatter_stylish.convert_value_to_string(True) == "true"
         assert gendiff.formatters.formatter_stylish.convert_value_to_string(False) == "false"
 
     @pytest.mark.parametrize("file_path, expected_result", [
-        ("test.json", parsing.read_json_from_path_to_dict),
-        ("test.yml", parsing.read_yaml_from_path_to_dict),
-        ("test.yaml", parsing.read_yaml_from_path_to_dict)
+        ("test.json", parsing.read_json_to_dict),
+        ("test.yml", parsing.read_yaml_to_dict),
+        ("test.yaml", parsing.read_yaml_to_dict)
     ])
     def test_get_proper_reader_for_file(self, file_path, expected_result):
-        assert parsing.get_proper_read_to_dict_for_file(file_path) is expected_result
+        assert parsing.get_proper_read_to_dict(file_path) is expected_result

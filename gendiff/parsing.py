@@ -5,7 +5,7 @@ from typing import Dict, Callable
 import yaml
 
 
-def get_proper_read_to_dict_for_file(file_path: str) -> Callable:
+def get_proper_read_to_dict(file_path: str) -> Callable:
     """
     Get proper function to read specific file based on file extension.
 
@@ -14,9 +14,9 @@ def get_proper_read_to_dict_for_file(file_path: str) -> Callable:
     """
     extension = os.path.splitext(file_path)[-1]
     if extension == ".json":
-        return read_json_from_path_to_dict
+        return read_json_to_dict
     elif extension in (".yml", ".yaml"):
-        return read_yaml_from_path_to_dict
+        return read_yaml_to_dict
     raise NotImplementedError(f"Unsupported file type {extension}")
 
 
@@ -29,7 +29,7 @@ def get_proper_read_to_dict_for_text(text: str) -> Callable:
     raise NotImplementedError(f"Cannot identify data type starting with '{text[0]}'.")  # noqa: E501
 
 
-def read_json_from_path_to_dict(file_path: str) -> Dict:
+def read_json_to_dict(file_path: str) -> Dict:
     """
     Read json file to Python dictionary.
 
@@ -41,7 +41,7 @@ def read_json_from_path_to_dict(file_path: str) -> Dict:
     return python_dict
 
 
-def read_yaml_from_path_to_dict(file_path: str) -> Dict:
+def read_yaml_to_dict(file_path: str) -> Dict:
     """
     Read yaml file to Python dictionary.
 
