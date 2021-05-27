@@ -20,6 +20,15 @@ def get_proper_read_to_dict_for_file(file_path: str) -> Callable:
     raise NotImplementedError(f"Unsupported file type {extension}")
 
 
+def get_proper_read_to_dict_for_text(text: str) -> Callable:
+    assert len(text) > 0, "Empty string provided."
+    if text[0] == '{':
+        return json.loads
+    if text[0] == '-':
+        return yaml.safe_load
+    raise NotImplementedError(f"Cannot identify data type starting with '{text[0]}'.")  # noqa: E501
+
+
 def read_json_from_path_to_dict(file_path: str) -> Dict:
     """
     Read json file to Python dictionary.

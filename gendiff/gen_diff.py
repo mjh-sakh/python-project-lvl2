@@ -4,7 +4,8 @@ from typing import Any, List, Dict, Optional, Callable
 from gendiff.formatters import formatter_json
 from gendiff.formatters import formatter_plain
 from gendiff.formatters import formatter_stylish
-from gendiff.parsing import get_proper_read_to_dict_for_file
+# from gendiff.parsing import get_proper_read_to_dict_for_file
+from gendiff.parsing import get_proper_read_to_dict_for_text
 
 
 def generate_diff(
@@ -24,14 +25,29 @@ def generate_diff(
     assert os.path.isfile(file2), f"{file2} is not a file."
     formatter = 'stylish' if formatter is None else formatter
 
-    read_to_dict = get_proper_read_to_dict_for_file(file1)
-    dict1 = read_to_dict(file1)
-    read_to_dict = get_proper_read_to_dict_for_file(file2)
-    dict2 = read_to_dict(file2)
+    # read_to_dict = get_proper_read_to_dict_for_file(file1)
+    # dict1 = read_to_dict(file1)
+    file1_text = read_text_from_file(file1)
+    read_to_dict = get_proper_read_to_dict_for_text(file1_text)
+    dict1 = read_to_dict(file1_text)
+    # read_to_dict = get_proper_read_to_dict_for_file(file2)
+    # dict2 = read_to_dict(file2)
+    file2_text = read_text_from_file(file2)
+    read_to_dict = get_proper_read_to_dict_for_text(file2_text)
+    dict2 = read_to_dict(file2_text)
     comparisons = get_comparison_for_two_dicts(dict1, dict2)
     generate_comparison_output_string = get_formatter(formatter)
     comparisons_string = generate_comparison_output_string(comparisons)
     return comparisons_string
+
+
+def read_text_from_file(file_path: str) -> str:
+    """
+    Open file, read it and return text.
+    """
+    with open(file_path, 'r') as file:
+        text = file.read()
+    return text
 
 
 def get_formatter(formatter: str) -> Callable:
