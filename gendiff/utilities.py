@@ -14,7 +14,7 @@ def unpack_item(item: Dict[str, Any]) -> Tuple[Any, str, Any]:
     return key, item_type, value
 
 
-def read_text_from_file(file_path: str) -> str:
+def read_text(file_path: str) -> str:
     """
     Open file, read it and return text.
     """
