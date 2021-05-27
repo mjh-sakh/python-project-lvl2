@@ -1,7 +1,0 @@
-Property 'common.level3.goes' was removed
-Property 'common.level3.new' was added with value: 'hello!'
-Property 'common.value1' was removed
-Property 'common.value2' was updated. From 2 to 2.1
-Property 'common.value4' was added with value: 4
-Property 'unique1' was removed
-Property 'unique2' was added with value: [complex value]

@@ -16,7 +16,7 @@ reps:
 	poetry show --tree
 
 run:
-	poetry run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+	poetry run gendiff tests/fixtures/file_nested_1.json tests/fixtures/file_nested_2.json
 
 run_help:
 	poetry run gendiff -h

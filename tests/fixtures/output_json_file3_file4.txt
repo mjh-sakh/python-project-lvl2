@@ -1,0 +1,132 @@
+{
+    "0": {
+        "item_type": "updated_branch",
+        "key": "common",
+        "value": {
+            "0.0": {
+                "item_type": "new",
+                "key": "follow",
+                "value": false
+            },
+            "0.1": {
+                "item_type": "same",
+                "key": "setting1",
+                "value": "Value 1"
+            },
+            "0.2": {
+                "item_type": "removed",
+                "key": "setting2",
+                "value": 200
+            },
+            "0.3": {
+                "item_type": "updated_old",
+                "key": "setting3",
+                "value": true
+            },
+            "0.4": {
+                "item_type": "updated_new",
+                "key": "setting3",
+                "value": null
+            },
+            "0.5": {
+                "item_type": "new",
+                "key": "setting4",
+                "value": "blah blah"
+            },
+            "0.6": {
+                "item_type": "new",
+                "key": "setting5",
+                "value": {
+                    "key5": "value5"
+                }
+            },
+            "0.7": {
+                "item_type": "updated_branch",
+                "key": "setting6",
+                "value": {
+                    "0.7.0": {
+                        "item_type": "updated_branch",
+                        "key": "doge",
+                        "value": {
+                            "0.7.0.0": {
+                                "item_type": "updated_old",
+                                "key": "wow",
+                                "value": ""
+                            },
+                            "0.7.0.1": {
+                                "item_type": "updated_new",
+                                "key": "wow",
+                                "value": "so much"
+                            }
+                        }
+                    },
+                    "0.7.1": {
+                        "item_type": "same",
+                        "key": "key",
+                        "value": "value"
+                    },
+                    "0.7.2": {
+                        "item_type": "new",
+                        "key": "ops",
+                        "value": "vops"
+                    }
+                }
+            }
+        }
+    },
+    "1": {
+        "item_type": "updated_branch",
+        "key": "group1",
+        "value": {
+            "1.0": {
+                "item_type": "updated_old",
+                "key": "baz",
+                "value": "bas"
+            },
+            "1.1": {
+                "item_type": "updated_new",
+                "key": "baz",
+                "value": "bars"
+            },
+            "1.2": {
+                "item_type": "same",
+                "key": "foo",
+                "value": "bar"
+            },
+            "1.3": {
+                "item_type": "updated_old",
+                "key": "nest",
+                "value": {
+                    "key": "value"
+                }
+            },
+            "1.4": {
+                "item_type": "updated_new",
+                "key": "nest",
+                "value": "str"
+            }
+        }
+    },
+    "2": {
+        "item_type": "removed",
+        "key": "group2",
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        }
+    },
+    "3": {
+        "item_type": "new",
+        "key": "group3",
+        "value": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        }
+    }
+}
