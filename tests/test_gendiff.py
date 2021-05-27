@@ -35,8 +35,8 @@ class TestClassBlackBoxTests:
         assert generate_diff(file1, file2) == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
-        ("file_nested_1.json", "file_nested_2.json", "output_stylish_file3_file4.txt"),
-        ("file_nested_1.yml", "file_nested_2.yaml", "output_stylish_file3_file4.txt")
+        ("file_nested_1.json", "file_nested_2.json", "output_nested_stylish.txt"),
+        ("file_nested_1.yml", "file_nested_2.yaml", "output_nested_stylish.txt")
     ])
     def test_generate_diff_with_recursion(self, file1, file2, file_with_expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
@@ -55,8 +55,8 @@ class TestClassBlackBoxTests:
         assert isinstance(generate_diff(file1, file2, formatter=None), str)
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
-        ("file_nested_1.json", "file_nested_2.json", "output_plain_file3_file4.txt"),
-        ("file_nested_1.yml", "file_nested_2.yaml", "output_plain_file3_file4.txt")
+        ("file_nested_1.json", "file_nested_2.json", "output_nested_plain.txt"),
+        ("file_nested_1.yml", "file_nested_2.yaml", "output_nested_plain.txt")
     ])
     def test_generate_diff_with_plain_formatter(self, file1, file2, file_with_expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
@@ -67,7 +67,7 @@ class TestClassBlackBoxTests:
         assert generate_diff(file1, file2, formatter='plain') == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
-        ("file_nested_1.json", "file_nested_2.yaml", "output_json_file3_file4.txt")
+        ("file_nested_1.json", "file_nested_2.yaml", "output_nested_json.txt")
     ])
     def test_generate_diff_with_json_formatter(self, file1, file2, file_with_expected_result):
         file1 = os.path.join(TEST_FOLDER, FIXTURES_FOLDER, file1)
