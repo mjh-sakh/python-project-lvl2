@@ -73,21 +73,6 @@ class TestClassWhiteBoxTests:
     def test_read_text(self, file, expected_result):
         assert read_text(locate(file)) == expected_result
 
-    @pytest.mark.parametrize("file, expected_result", [
-        ("empty.json", {}),
-        ("simple.json", {"test": 1}),
-    ])
-    def test_read_json_from_path_to_dict(self, file, expected_result):
-        assert parsing.read_json_to_dict(locate(file)) == expected_result
-
     def test_formatter_proper_bool_representation(self):
         assert gendiff.formatters.formatter_stylish.convert_value_to_string(True) == "true"
         assert gendiff.formatters.formatter_stylish.convert_value_to_string(False) == "false"
-
-    @pytest.mark.parametrize("file, expected_result", [
-        ("test.json", parsing.read_json_to_dict),
-        ("test.yml", parsing.read_yaml_to_dict),
-        ("test.yaml", parsing.read_yaml_to_dict)
-    ])
-    def test_get_proper_reader_for_file(self, file, expected_result):
-        assert parsing.get_proper_read_to_dict(locate(file)) is expected_result
