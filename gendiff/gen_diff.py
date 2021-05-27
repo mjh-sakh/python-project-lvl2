@@ -39,5 +39,3 @@ def generate_diff(
     generate_comparison_output_string = get_formatter(formatter)
     comparisons_string = generate_comparison_output_string(comparisons)
     return comparisons_string
-
-
