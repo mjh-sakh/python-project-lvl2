@@ -5,7 +5,7 @@ from typing import Callable
 import yaml
 
 
-def get_proper_read_to_dict(file_path: str) -> Callable:
+def get_proper_load_to_dict(file_path: str) -> Callable:
     """
     Get proper function to read specific file based on file extension.
 
