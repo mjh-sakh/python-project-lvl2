@@ -1,9 +1,9 @@
-from typing import Callable
+from typing import Callable, List, Dict, Any
 
 from gendiff.formatters import formatter_stylish, formatter_plain, formatter_json  # noqa: E501
 
 
-def get_formatter(formatter: str) -> Callable:
+def get_formatter(formatter: str) -> Callable[[List[Dict[str, Any]]], str]:
     """
     Get proper formatter function to generate string.
 
