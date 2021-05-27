@@ -7,10 +7,10 @@ import yaml
 
 def get_proper_load_to_dict(file_path: str) -> Callable:
     """
-    Get proper function to read specific file based on file extension.
+    Get proper function to read specific format based on file extension.
 
     :param file_path: str.
-    :return: json or yaml read to dict function.
+    :return: json or yaml load function.
     """
     extension = os.path.splitext(file_path)[-1]
     if extension == ".json":
