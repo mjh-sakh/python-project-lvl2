@@ -4,7 +4,7 @@ import pytest
 
 import gendiff.formatters.formatter_stylish
 from gendiff import generate_diff
-from gendiff.utilities import read_text
+from gendiff.utilities import read_
 
 TEST_FOLDER = "tests"
 FIXTURES_FOLDER = "fixtures"
@@ -39,7 +39,7 @@ class TestClassBlackBoxTests:
         ("file_nested_1.yml", "file_nested_2.yaml", "output_nested_stylish.txt")
     ])
     def test_generate_diff_with_recursion(self, file1, file2, file_with_expected_result):
-        expected_result = read_text(locate(file_with_expected_result))
+        expected_result = read_(locate(file_with_expected_result))
         assert generate_diff(locate(file1), locate(file2)) == expected_result
 
     @pytest.mark.parametrize("file1, file2", [
@@ -53,14 +53,14 @@ class TestClassBlackBoxTests:
         ("file_nested_1.yml", "file_nested_2.yaml", "output_nested_plain.txt")
     ])
     def test_generate_diff_with_plain_formatter(self, file1, file2, file_with_expected_result):
-        expected_result = read_text(locate(file_with_expected_result))
+        expected_result = read_(locate(file_with_expected_result))
         assert generate_diff(locate(file1), locate(file2), formatter='plain') == expected_result
 
     @pytest.mark.parametrize("file1, file2, file_with_expected_result", [
         ("file_nested_1.json", "file_nested_2.yaml", "output_nested_json.txt")
     ])
     def test_generate_diff_with_json_formatter(self, file1, file2, file_with_expected_result):
-        expected_result = read_text(locate(file_with_expected_result))
+        expected_result = read_(locate(file_with_expected_result))
         assert generate_diff(locate(file1), locate(file2), formatter='json') == expected_result
 
 
@@ -69,7 +69,7 @@ class TestClassWhiteBoxTests:
         ("simple.json", '{\n  "test": 1\n}')
     ])
     def test_read_text(self, file, expected_result):
-        assert read_text(locate(file)) == expected_result
+        assert read_(locate(file)) == expected_result
 
     def test_formatter_proper_bool_representation(self):
         assert gendiff.formatters.formatter_stylish.convert_value_to_string(True) == "true"
