@@ -3,9 +3,7 @@ import os
 import pytest
 
 import gendiff.formatters.formatter_stylish
-import gendiff.utilities
 from gendiff import generate_diff
-from gendiff import parsing
 from gendiff.utilities import read_text
 
 TEST_FOLDER = "tests"
