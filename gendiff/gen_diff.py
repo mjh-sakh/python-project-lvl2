@@ -1,9 +1,7 @@
 import os
-from typing import Any, List, Dict, Optional, Callable
+from typing import Any, List, Dict, Optional
 
-from gendiff.formatters import formatter_json
-from gendiff.formatters import formatter_plain
-from gendiff.formatters import formatter_stylish
+from gendiff.formatters.formatter import get_formatter
 # from gendiff.parsing import get_proper_read_to_dict_for_file
 from gendiff.parsing import get_proper_read_to_dict_for_text
 
@@ -48,23 +46,6 @@ def read_text_from_file(file_path: str) -> str:
     with open(file_path, 'r') as file:
         text = file.read()
     return text
-
-
-def get_formatter(formatter: str) -> Callable:
-    """
-    Get proper formatter function to generate string.
-
-    :param formatter: stylish, plain or json, str.
-    :return: formatter function.
-    """
-    if formatter == 'stylish':
-        return formatter_stylish.generate_comparison_output_string
-    elif formatter == "plain":
-        return formatter_plain.generate_comparison_output_string
-    elif formatter == "json":
-        return formatter_json.generate_comparison_output_string
-    else:
-        raise NotImplementedError('Formatter "{formatter}" is not implemented. Choose "stylish"')  # noqa: E501
 
 
 def get_comparison_for_two_dicts(  # noqa: C901
